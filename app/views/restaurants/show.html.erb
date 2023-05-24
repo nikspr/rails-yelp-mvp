@@ -1,2 +1,30 @@
-<h1>Restaurants#show</h1>
-<p>Find me in app/views/restaurants/show.html.erb</p>
+<div class="container">
+  <h1 class="mt-4">Restaurant Details</h1>
+
+  <div class="card mt-4">
+    <div class="card-body text-dark">
+      <h5 class="card-title"><%= @restaurant.name %></h5>
+      <p class="card-text"><%= @restaurant.address %></p>
+      <p class="card-text"><%= @restaurant.category %></p>
+      <p class="card-text">Phone: <%= @restaurant.phone_number %></p>
+    </div>
+  </div>
+
+  <h2 class="mt-4">Reviews</h2>
+
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card mt-4">
+      <div class="card-body text-dark">
+        <h5 class="card-title">Rating: <% @this_review = "🌟" * review.rating.to_i %><%= @this_review %></h5>
+        <p class="card-text"><%= review.content %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to "Create review", new_restaurant_review_path(@restaurant), class: "btn btn-success" %>
+    <%= link_to "Edit", edit_restaurant_path(@restaurant), class: "btn btn-primary" %>
+    <%= link_to "Delete", restaurant_path(@restaurant), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to "Back to All Restaurants", restaurants_path, class: "btn btn-secondary" %>
+  </div>
+</div>

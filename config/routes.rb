@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  resources :restaurants do
-    resources :reviews
+  resources :restaurants, only: [:index, :show, :new, :create, :edit] do
+    resources :reviews, only: [:new, :create]
   end
 end
